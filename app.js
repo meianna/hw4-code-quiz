@@ -1,5 +1,19 @@
 $("#quizContainer").hide();
 $("#resultsContainer").hide();
+var uIn
+var highscore
+
+function displayLocalStorage() {
+  uIn = localStorage.getItem("userInitials") || "Thank you for taking my quiz!";
+  highscore = localStorage.getItem("score") || "Good luck!";
+  $("#userId").text(uIn);
+  $("#highscore").text(highscore);
+}
+displayLocalStorage()
+
+var counter = 30;
+var timerId = "";
+
 var quizQuestions = [
   {
     question: "To make a link open in a different tab what would you assign for target",
@@ -27,6 +41,7 @@ var quizQuestions = [
     answer: "_blank"
   }
 ]
+
 var currentQuestion = 0;
 var rightAnswer = 0;
 var wrongAnswer = 0;
@@ -34,6 +49,11 @@ var wrongAnswer = 0;
 $("#startBtn").on("click", function () {
   $("#quizContainer").show();
   $("#startQuiz").hide();
+  currentQuestion = 0
+  rightAnswer = 0
+  wrongAnswer = 0
+  counter = 30
+  timerId = setInterval(displayTime, 1000)
   displayQuestion()
 })
 
@@ -53,6 +73,7 @@ $(".options").on("click", function () {
     rightAnswer++
   } else {
     wrongAnswer++
+    counter = counter - 5
   }
   if (currentQuestion < quizQuestions.length - 1) {
     currentQuestion++
@@ -64,16 +85,32 @@ $(".options").on("click", function () {
 
 function displayResults() {
   console.log(rightAnswer, wrongAnswer)
+  clearInterval(timerId);
   $("#quizContainer").hide();
   $("#resultsContainer").show();
-  $("#score").text("Wins: " + rightAnswer + "Losses: " + wrongAnswer);
+  $("#score").text("Wins: " + rightAnswer + " " + "Losses: " + wrongAnswer);
 }
 
 $("#saveUser").on("click", function () {
   var userInitials = $("#userInitials").val();
-  localStorage.setItem("userInitials", username);
-  localStorage.setItem("score", rightAnswer);
+  if (rightAnswer < highscore) {
+    alert("You did not get the high score!")
+  } else {
+    localStorage.setItem("userInitials", userInitials);
+    localStorage.setItem("score", rightAnswer);
+    displayLocalStorage();
+  }
+  $("#resultsContainer").hide()
+  $("#startQuiz").show()
 })
 
-var uin = localStorage.getItem("userInitials");
-var highscore = localStorage.getItem("score");
+function displayTime() {
+  $("#timeId").text(counter)
+  if (counter <= 0) {
+    displayResults()
+  } else {
+    counter--
+  }
+}
+
+

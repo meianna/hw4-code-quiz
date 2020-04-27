@@ -16,30 +16,30 @@ var timerId = "";
 
 var quizQuestions = [
   {
-    question: "To make a link open in a different tab what would you assign for target",
-    choices: ["_newtab", "tab", "_newwindow", "_blank"],
-    answer: "_blank"
+    question: "How many grapes does it take to make one bottle of wine?",
+    choices: ["100", "700", "1,000", "10,000"],
+    answer: "700"
   },
   {
-    question: "2 To make a link open in a different tab what would you assign for target",
-    choices: ["_newtab", "tab", "_newwindow", "_blank"],
-    answer: "_blank"
+    question: "What is pteronophobia?",
+    choices: ["Fear of feathers", "Fear of rain", "Fear of stairs", "Fear of needles"],
+    answer: "Fear of feathers"
   },
   {
-    question: "3 To make a link open in a different tab what would you assign for target",
-    choices: ["_3newtab", "tab", "_newwindow", "_blank"],
-    answer: "_blank"
+    question: "What is the most widely printed book in history?",
+    choices: ["Bible", "Harry Potter", "The Catcher in the Rye", "IKEA catalog"],
+    answer: "IKEA catalog"
   },
   {
-    question: "T4o make a link open in a different tab what would you assign for target",
-    choices: ["_4newtab", "tab", "_newwindow", "_blank"],
-    answer: "_blank"
+    question: "What is the Twitter bird's name?",
+    choices: ["Tweety", "Frank", "Larry", "Walter"],
+    answer: "Larry"
   },
   {
-    question: "To5 make a link open in a different tab what would you assign for target",
-    choices: ["_n5ewtab", "tab", "_newwindow", "_blank"],
-    answer: "_blank"
-  }
+    question: "On average, how much of your life do you spend waiting at red lights?",
+    choices: ["2 weeks", "3 months", "6 months", "2 years"],
+    answer: "6 months"
+  },
 ]
 
 var currentQuestion = 0;
@@ -59,7 +59,7 @@ $("#startBtn").on("click", function () {
 
 function displayQuestion() {
   $("#question").text(quizQuestions[currentQuestion].question)
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < 5; i++) {
     $("#option" + i).html(quizQuestions[currentQuestion].choices[i])
     $("#option" + i).attr("data-value", quizQuestions[currentQuestion].choices[i])
     $("#option" + i).attr("data-right", quizQuestions[currentQuestion].answer)
@@ -96,6 +96,7 @@ $("#saveUser").on("click", function () {
   if (rightAnswer < highscore) {
     alert("You did not get the high score!")
   } else {
+    alert("Nice! You got the high score!")
     localStorage.setItem("userInitials", userInitials);
     localStorage.setItem("score", rightAnswer);
     displayLocalStorage();

@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Code Quiz</title>
+  <title>Random Fact Quiz</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
@@ -12,13 +12,17 @@
 
 <body>
   <div class="jumbotron">
-    <h1>Random Facts Quiz</h1>
-    <h3>Previous user: <span id="userId">
-      </span></h3>
-    <h3>Highscore: <span id="highscore"> </span></h3>
-    <h6>Time: <span id="timeId"></span></h6>
+    <h1>Random Fact Quiz</h1>
+    <i>
+      Welcome to the Random Fact Quiz! You will have 30 seconds to answer 5 random questions.
+      For every wrong answer you will lose 5 seconds. The highest score will be saved. Good luck!
+    </i>
+    <hr>
+    <h5>User: <span id="userId"></span></h5>
+    <h5>Highscore: <span id="highscore"></span></h5>
+    <hr>
+    <h3>Time: <span id="timeId"></span></h3>
   </div>
-
 
   <container id="startQuiz">
     <button id="startBtn">Start</button>
@@ -32,11 +36,8 @@
     <button class="options" id="option3" data-value="" data-right=""></button>
   </container>
 
-
-
   <container id="resultsContainer">
-    <p id="score">
-    </p>
+    <p id="score"></p>
     <input type="text" id="userInitials" />
     <button id="saveUser">Save</button>
   </container>

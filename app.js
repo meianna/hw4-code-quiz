@@ -1,19 +1,11 @@
-$("#quizContainer").hide();
-$("#resultsContainer").hide();
-var uIn
-var highscore
-
-function displayLocalStorage() {
-  uIn = localStorage.getItem("userInitials") || "Thank you for taking my quiz!";
-  highscore = localStorage.getItem("score") || "Good luck!";
-  $("#userId").text(uIn);
-  $("#highscore").text(highscore);
-}
-displayLocalStorage()
-
+// Declaring vars here
 var counter = 30;
 var timerId = "";
-
+var userInitials = localStorage.getItem("userInitials");
+var highscore = localStorage.getItem("score");
+var currentQuestion = 0;
+var rightAnswer = 0;
+var wrongAnswer = 0;
 var quizQuestions = [
   {
     question: "How many grapes does it take to make one bottle of wine?",
@@ -40,11 +32,19 @@ var quizQuestions = [
     choices: ["2 weeks", "3 months", "6 months", "2 years"],
     answer: "6 months"
   },
-]
+];
 
-var currentQuestion = 0;
-var rightAnswer = 0;
-var wrongAnswer = 0;
+// Creating functions here
+$("#quizContainer").hide();
+$("#resultsContainer").hide();
+
+function displayLocalStorage() {
+  userInitials;
+  highscore;
+  $("#userId").text(userInitials);
+  $("#highscore").text(highscore);
+};
+displayLocalStorage();
 
 $("#startBtn").on("click", function () {
   $("#quizContainer").show();
@@ -55,7 +55,7 @@ $("#startBtn").on("click", function () {
   counter = 30
   timerId = setInterval(displayTime, 1000)
   displayQuestion()
-})
+});
 
 function displayQuestion() {
   $("#question").text(quizQuestions[currentQuestion].question)
@@ -64,7 +64,7 @@ function displayQuestion() {
     $("#option" + i).attr("data-value", quizQuestions[currentQuestion].choices[i])
     $("#option" + i).attr("data-right", quizQuestions[currentQuestion].answer)
   }
-}
+};
 
 $(".options").on("click", function () {
   var userChoice = $(this).attr("data-value")
@@ -81,7 +81,7 @@ $(".options").on("click", function () {
   } else {
     displayResults()
   }
-})
+});
 
 function displayResults() {
   console.log(rightAnswer, wrongAnswer)
@@ -89,7 +89,7 @@ function displayResults() {
   $("#quizContainer").hide();
   $("#resultsContainer").show();
   $("#score").text("Wins: " + rightAnswer + " " + "Losses: " + wrongAnswer);
-}
+};
 
 $("#saveUser").on("click", function () {
   var userInitials = $("#userInitials").val();
@@ -103,7 +103,7 @@ $("#saveUser").on("click", function () {
   }
   $("#resultsContainer").hide()
   $("#startQuiz").show()
-})
+});
 
 function displayTime() {
   $("#timeId").text(counter)
@@ -112,6 +112,4 @@ function displayTime() {
   } else {
     counter--
   }
-}
-
-
+};
